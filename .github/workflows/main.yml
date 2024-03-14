@@ -32,3 +32,12 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: |
           docker push 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
+          
+      - name: Send Slack Notification
+        uses: rtCamp/action-slack-notify@v3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          channel: general
+          text: |
+            Docker image has been pushed to Amazon ECR successfully.
