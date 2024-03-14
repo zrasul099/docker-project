@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+# env:
+#   # Credentials for deployment to AWS
+# AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+# AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   build-and-push:
@@ -11,15 +15,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+      - name: configure aws
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-        with:
-          region: us-west-2
-          registry: 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        # with:
+        #   region: us-west-2
+        #   registry: 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar
+        #   # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        #   # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Build Docker image
         run: docker build -t my-image:latest .
