@@ -17,7 +17,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         with:
           region: us-west-2
-          registry: 5925-2416-7743.dkr.ecr.us-west-2.amazonaws.com
+          registry: 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
