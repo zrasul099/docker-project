@@ -33,7 +33,7 @@ jobs:
         run: |
           docker push 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
       - name: Lint Dockerfile
-        uses: docker://hadolint/hadolint:latest
+        uses: docker://hadolint/hadolint:3.1.0
         with:
           args: Dockerfile
 
