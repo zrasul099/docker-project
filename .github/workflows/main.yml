@@ -1,16 +1,24 @@
-name: Docker to ECR
+name: Dockerfile Lint
 
 on:
   push:
     branches:
-      - main
+      - dso-111
 
 jobs:
-  build-and-push:
+  lint:
+    name: Lint Dockerfile
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - uses: actions/checkout@v3
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+         dockerfile: Dockerfile
+
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -32,4 +40,3 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: |
           docker push 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
-
