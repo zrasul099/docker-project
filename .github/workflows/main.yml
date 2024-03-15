@@ -32,4 +32,8 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: |
           docker push 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
+      - name: Lint Dockerfile
+        uses: docker://hadolint/hadolint:latest
+        with:
+          args: Dockerfile
 
