@@ -21,12 +21,12 @@ jobs:
          dockerfile: Dockerfile
 
       - name: Save linting results
-        run: echo "${{ steps.hadolint.outputs.results }}" > lint-results.txt
-        if: steps.hadolint.outputs.results
+        run: echo "${{ steps.Run Hadolint.outputs.results }}" > lint-results.txt
+        if: always()
 
       - name: Display linting results
         run: cat lint-results.txt
-        if: steps.hadolint.outputs.results
+        if: always()
 
 
       - name: Configure AWS credentials
