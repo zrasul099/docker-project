@@ -3,7 +3,7 @@ name: Docker to ECR
 on:
   push:
     branches:
-      - main
+      - dso-111
 
 jobs:
   build-and-push:
