@@ -33,12 +33,3 @@ jobs:
         run: |
           docker push 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
 
-      - name: Publish to slack channel via bot token
-        id: slack
-        uses: slackapi/slack-github-action@v1.25.0
-        with:
-         channel-id: C06P800TQLF # ID of Slack Channel you want to post to
-         slack-message: 'posting from a github action!' # The message you want to post
-        env:
-         SLACK_BOT_TOKEN: TCq8IrVIsIRoHREXOL2o0V6M
-  #
