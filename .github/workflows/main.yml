@@ -40,9 +40,9 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: docker push 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
 
-      - name: Send Slack notification
-        uses: slack/webhook-action@v2
-        with:
-          url: ${{ secrets.SLACK_WEBHOOK_URL }}
-          method: POST
-          payload: '{"text": "Docker image has been pushed to ECR successfully!"}'
+      # - name: Send Slack notification
+      #   uses: slack/webhook-action@v2
+      #   with:
+      #     url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     method: POST
+      #     payload: '{"text": "Docker image has been pushed to ECR successfully!"}'
