@@ -3,6 +3,7 @@ name: Dockerfile Lint
 on:
   push:
     branches:
+      - main
       - dso-111
 
 jobs:
