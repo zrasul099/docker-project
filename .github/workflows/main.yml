@@ -52,3 +52,5 @@ jobs:
           channel: general
           text: |
             Docker image failed to be pushed to Amazon ECR.
+
+  #
