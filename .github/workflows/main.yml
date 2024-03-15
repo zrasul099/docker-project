@@ -39,7 +39,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          channel: general
+          channel: action
           text: |
             Docker image has been pushed to Amazon ECR successfully.
 
@@ -49,7 +49,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          channel: general
+          channel: action
           text: |
             Docker image failed to be pushed to Amazon ECR.
 
