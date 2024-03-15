@@ -3,8 +3,7 @@ name: Dockerfile Lint
 on:
   push:
     branches:
-      - main
-      - master
+      - dso-111
   pull_request:
     branches:
       - dso-111
