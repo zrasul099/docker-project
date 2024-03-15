@@ -1,32 +1,23 @@
-name: Dockerfile Lint
+name: Dockerfile Lint and Docker to ECR
 
 on:
   push:
     branches:
-      - main
-      - dso-111
+      - slack
 
 jobs:
-  lint:
-    name: Lint Dockerfile
+  lint-and-push:
+    name: Lint Dockerfile and Push to ECR
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - uses: actions/checkout@v3
-      - uses: hadolint/hadolint-action@v3.1.0
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
         with:
-         dockerfile: Dockerfile
+          dockerfile: Dockerfile
 
-      - name: Save linting results
-        run: echo "${{ steps.Run Hadolint.outputs.results }}" > lint-results.txt
-        if: always()
-
-      - name: Display linting results
-        run: cat lint-results.txt
-        if: always()
 
 
       - name: Configure AWS credentials
@@ -47,5 +38,11 @@ jobs:
         run: docker tag my-image:latest 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
 
       - name: Push Docker image to Amazon ECR
-        run: |
-          docker push 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
+        run: docker push 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
+
+      - name: Send Slack notification
+        uses: slack/webhook-action@v2
+        with:
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          method: POST
+          payload: '{"text": "Docker image has been pushed to ECR successfully!"}'
