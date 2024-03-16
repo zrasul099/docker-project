@@ -41,7 +41,7 @@ jobs:
         run: docker push 592524167743.dkr.ecr.us-west-2.amazonaws.com/bar:latest
 
       - name: Send Slack notification
-        uses: rtCamp/action-slack-notify@v2.314.1
+        uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
